@@ -3,6 +3,7 @@ package com.springapp.mvc.controllers;
 
 import com.springapp.mvc.model.ContentWrapper;
 import com.springapp.mvc.service.QuestionsService;
+import com.springapp.mvc.service.QuestionsServiceImpl;
 import com.springapp.mvc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,12 +19,26 @@ public class APIController {
 	private UserService userService;
 	@Autowired
 	private QuestionsService questionsService;
+//	@Autowired
+//	QuestionsService questionsService1;
+
+	private String answer;
 
 	@RequestMapping(method = RequestMethod.POST, consumes = "application/json")
 	public void consumeApplication(@RequestBody ContentWrapper content) {
-		userService.saveUser(content.getUser());
-		for(int i = 0; i < content.getQuestions().size(); i++) {
-			questionsService.saveQuestions(content.getQuestions().get(i));
+
+		boolean approval = true;
+
+		for(int i = 0; i < content.getQuestions().size(); i++){
+			questionsService = new QuestionsServiceImpl();
+			answer = questionsService.getAnswerById(content.getQuestions().get(i).getId());
+
+			if(!(content.getQuestions().get(i).getAnswer().equals(answer))) {
+				approval = false;
+			}
+		}
+		if(approval == true){
+			userService.saveUser(content.getUser());
 		}
 	}
 

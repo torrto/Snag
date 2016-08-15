@@ -6,20 +6,30 @@ import javax.persistence.*;
  * Created by rhy704 on 8/14/16.
  */
 @Entity
+@Table(name="questions")
 public class Questions {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int unique;
 
+    private String id;
     private String question;
     private String answer;
 
-    public int getId() {
+    public int getUnique() {
+        return unique;
+    }
+
+    public void setUnique(int unique) {
+        this.unique = unique;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

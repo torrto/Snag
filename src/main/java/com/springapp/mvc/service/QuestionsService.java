@@ -10,4 +10,6 @@ public interface QuestionsService {
 
     void saveQuestions(Questions questions);
 
+    String getAnswerById(String id);
+
 }
