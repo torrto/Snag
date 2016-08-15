@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface QuestionsDao {
 
-    void saveQuestions (List<Questions> questions);
+    void saveQuestions (Questions questions);
 
     Questions getQuestionbyId (int id);
 

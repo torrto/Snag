@@ -34,10 +34,6 @@ public abstract class AbstractDao<PK extends Serializable, T> {
         getSession().persist(entity);
     }
 
-    public void persistList(List<T> entity) {
-        getSession().persist(entity);
-    }
-
     protected Criteria createEntityCriteria(){
         return getSession().createCriteria(persistentClass);
     }
