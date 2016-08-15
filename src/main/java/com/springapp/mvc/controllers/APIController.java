@@ -1,13 +1,16 @@
 package com.springapp.mvc.controllers;
 
 
+import com.springapp.mvc.model.Questions;
 import com.springapp.mvc.model.User;
+import com.springapp.mvc.service.QuestionsService;
 import com.springapp.mvc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 //this is a rest api that needs to accept json input which will have name, id of question, and the answer. Need
 // to be able to verify if the applicant passes min qualifications or not.
@@ -17,10 +20,26 @@ import org.springframework.web.bind.annotation.RestController;
 public class APIController {
 
 	@Autowired
-	private UserService service;
+	private UserService userService;
+	@Autowired
+	private QuestionsService questionsService;
 
 	@RequestMapping(method = RequestMethod.POST, consumes = "application/json")
-	public void consumeApplication(@RequestBody User user) {
-		service.saveUser(user);
+	public void consumeApplication(@RequestBody User user, @RequestBody List<Questions> questions) {
+		userService.saveUser(user);
+		questionsService.saveQuestions(questions);
 	}
+
+
+
+//	@RequestMapping(method = RequestMethod.GET)
+//	public String testHibernateGet(ModelMap model) {
+//		return "testhibernateget";
+//	}
+//
+//	@RequestMapping(value = "/testhibernate", method = RequestMethod.POST)
+//	public String testHibernate(@ModelAttribute("user") User user) {
+//		service.saveUser(user);
+//		return "testhibernate";
+//	}
 }

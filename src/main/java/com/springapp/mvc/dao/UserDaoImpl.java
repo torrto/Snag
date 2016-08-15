@@ -14,7 +14,7 @@ import java.util.List;
 public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 
     public User findById(int id) {
-        return getByKey(id);
+        return getById(id);
     }
 
     public void saveUser(User user) {

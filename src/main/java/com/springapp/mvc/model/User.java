@@ -1,11 +1,16 @@
 package com.springapp.mvc.model;
 
+import javax.persistence.*;
 /**
  * Created by rhy704 on 8/14/16.
  */
+@Entity
 public class User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String username;
     private String email;
     private int phone;
