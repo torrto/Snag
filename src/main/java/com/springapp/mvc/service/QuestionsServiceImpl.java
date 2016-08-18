@@ -21,4 +21,9 @@ public class QuestionsServiceImpl implements QuestionsService {
     public void saveQuestions(Questions questions) {
         dao.saveQuestions(questions);
     }
+
+    public String getAnswerById(String id) {
+        return dao.getAnswerById(id);
+    }
+
 }

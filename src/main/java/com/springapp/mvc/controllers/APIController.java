@@ -1,14 +1,14 @@
 package com.springapp.mvc.controllers;
 
 
-import com.springapp.mvc.model.Questions;
-import com.springapp.mvc.model.QuestionsWrapper;
+import com.springapp.mvc.model.ContentWrapper;
 import com.springapp.mvc.model.User;
 import com.springapp.mvc.service.QuestionsService;
+import com.springapp.mvc.service.QuestionsServiceImpl;
 import com.springapp.mvc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 //this is a rest api that needs to accept json input which will have name, id of question, and the answer. Need
@@ -23,14 +23,43 @@ public class APIController {
 	@Autowired
 	private QuestionsService questionsService;
 
-	@RequestMapping(method = RequestMethod.POST, consumes = "application/json")
-	public void consumeApplication(@RequestBody User user, @RequestBody QuestionsWrapper questions) {
-		userService.saveUser(user);
 
-		for(int i = 0; i < questions.getQuestions().size(); i++) {
-			questionsService.saveQuestions(questions.getQuestions().get(i));
+	@ResponseBody
+	@RequestMapping(method = RequestMethod.POST, consumes = "application/json")
+	public ResponseEntity<ContentWrapper> consumeApplication(@RequestBody ContentWrapper wrapper) {
+		System.out.println("hoping its not failing....... I hope" + wrapper.getUser().getUsername());
+		userService.saveUser(wrapper.getUser());
+		for(int i = 0; i < wrapper.getQuestions().size(); i++){
+			questionsService.saveQuestions(wrapper.getQuestions().get(i));
 		}
+		System.out.println("saved I hope" + wrapper.getUser().getEmail());
+
+
+
+
+
+
+		return new ResponseEntity<ContentWrapper>(wrapper, HttpStatus.CREATED);
 	}
+
+
+//	@RequestMapping(method = RequestMethod.POST, consumes = "application/json")
+//	public void consumeApplication(@RequestBody ContentWrapper content) {
+//
+//		boolean approval = true;
+//
+//		for(int i = 0; i < content.getQuestions().size(); i++){
+//			questionsService = new QuestionsServiceImpl();
+//			answer = questionsService.getAnswerById(content.getQuestions().get(i).getId());
+//
+//			if(!(content.getQuestions().get(i).getAnswer().equals(answer))) {
+//				approval = false;
+//			}
+//		}
+//		if(approval == true){
+//			userService.saveUser(content.getUser());
+//		}
+//	}
 
 
 

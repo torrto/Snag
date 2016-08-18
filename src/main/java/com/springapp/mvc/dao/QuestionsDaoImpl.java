@@ -1,6 +1,8 @@
 package com.springapp.mvc.dao;
 
 import com.springapp.mvc.model.Questions;
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -16,7 +18,14 @@ public class QuestionsDaoImpl extends AbstractDao<Integer, Questions> implements
         persist(questions);
     }
 
-    public Questions getQuestionbyId(int id) {
-        return getById(id);
+//    public Questions getQuestionbyId(int id) {
+//        return getById(id);
+//    }
+
+    public String getAnswerById(String id) {
+        Criteria criteria = createEntityCriteria();
+        criteria.add(Restrictions.eq("id", id));
+        Questions questions = (Questions) criteria.list().get(0);
+        return questions.getAnswer();
     }
 }

@@ -11,7 +11,9 @@ public interface QuestionsDao {
 
     void saveQuestions (Questions questions);
 
-    Questions getQuestionbyId (int id);
+//    Questions getQuestionbyId (int id);
+
+    String getAnswerById(String id);
 
 
 }
