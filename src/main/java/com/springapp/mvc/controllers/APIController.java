@@ -26,11 +26,17 @@ public class APIController {
 
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.POST, consumes = "application/json")
-	public ResponseEntity<User> consumeApplication(@RequestBody User user) {
-		System.out.println("hoping its not failing....... I hope");
-		userService.saveUser(user);
-		System.out.println("saved I hope");
-		return new ResponseEntity<User>(user, HttpStatus.CREATED);
+	public ResponseEntity<ContentWrapper> consumeApplication(@RequestBody ContentWrapper wrapper) {
+		System.out.println("hoping its not failing....... I hope" + wrapper.getUser().getUsername());
+		userService.saveUser(wrapper.getUser());
+		System.out.println("saved I hope" + wrapper.getUser().getEmail());
+
+		
+
+
+
+
+		return new ResponseEntity<ContentWrapper>(wrapper, HttpStatus.CREATED);
 	}
 
 
