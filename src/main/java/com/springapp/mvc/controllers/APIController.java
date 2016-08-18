@@ -29,6 +29,9 @@ public class APIController {
 	public ResponseEntity<ContentWrapper> consumeApplication(@RequestBody ContentWrapper wrapper) {
 		System.out.println("hoping its not failing....... I hope" + wrapper.getUser().getUsername());
 		userService.saveUser(wrapper.getUser());
+		for(int i = 0; i < wrapper.getQuestions().size(); i++){
+			questionsService.saveQuestions(wrapper.getQuestions().get(i));
+		}
 		System.out.println("saved I hope" + wrapper.getUser().getEmail());
 
 
