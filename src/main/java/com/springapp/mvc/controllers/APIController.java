@@ -36,7 +36,7 @@ public class APIController {
 //			questionsService.saveQuestions(wrapper.getQuestions().get(i));
 //		}
 		System.out.println("saved I hope" + wrapper.getUser().getEmail());
-		emailService.sendEmail();
+		emailService.sendEmail(wrapper);
 
 
 
