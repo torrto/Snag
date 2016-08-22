@@ -30,18 +30,20 @@ public class APIController {
 	@ResponseBody
 	@RequestMapping(method = RequestMethod.POST, consumes = "application/json")
 	public ResponseEntity<ContentWrapper> consumeApplication(@RequestBody ContentWrapper wrapper) {
-		System.out.println("hoping its not failing....... I hope" + wrapper.getUser().getUsername());
-//		userService.saveUser(wrapper.getUser());
-//		for(int i = 0; i < wrapper.getQuestions().size(); i++){
-//			questionsService.saveQuestions(wrapper.getQuestions().get(i));
-//		}
-		System.out.println("saved I hope" + wrapper.getUser().getEmail());
-		emailService.sendEmail(wrapper);
-
-
-
-
-
+		int questionListSize = wrapper.getQuestions().size();
+		int minQues = 0;
+		for(int i = 0; i < questionListSize; i++){
+			if(wrapper.getQuestions().get(i).getAnswer().equalsIgnoreCase("yes")){
+				minQues += 1;
+			}
+		}
+		if(minQues == questionListSize){
+			userService.saveUser(wrapper.getUser());
+//				for(int q = 0; q < wrapper.getQuestions().size(); q++){
+//					questionsService.saveQuestions(wrapper.getQuestions().get(q));
+//				}
+			emailService.sendEmail(wrapper);
+		}
 
 		return new ResponseEntity<ContentWrapper>(wrapper, HttpStatus.CREATED);
 	}
