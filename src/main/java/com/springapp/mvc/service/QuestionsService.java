@@ -12,4 +12,6 @@ public interface QuestionsService {
 
     String getAnswerById(String id);
 
+    List<String> getAllAnswers();
+
 }

@@ -29,7 +29,7 @@ public class APIController {
 		int questionListSize = wrapper.getQuestions().size();
 		int minQues = 0;
 		for(int i = 0; i < questionListSize; i++){
-			if(wrapper.getQuestions().get(i).getAnswer().equalsIgnoreCase("yes")){
+			if(wrapper.getQuestions().get(i).getAnswer().equalsIgnoreCase(questionsService.getAllAnswers().get(i))){
 				minQues += 1;
 			}
 		}
