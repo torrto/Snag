@@ -21,7 +21,7 @@ public class EmailService {
         message.setTo("danielmltn@gmail.com");
         message.setSubject("New Potential Applicant");
         message.setText(wrapper.getUser().getUsername() + " has passed the minimum qualifications. You can reach the applicant via email: "
-        + wrapper.getUser().getEmail() + " or via phone " + wrapper.getUser().getPhone());
+        + wrapper.getUser().getEmail() + " or via phone: " + wrapper.getUser().getPhone());
         mailSender.send(message);
 
     }

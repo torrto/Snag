@@ -26,4 +26,6 @@ public class QuestionsServiceImpl implements QuestionsService {
         return dao.getAnswerById(id);
     }
 
+    public List<String> getAllAnswers() { return dao.getAllAnswers(); }
+
 }

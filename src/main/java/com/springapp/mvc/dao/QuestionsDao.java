@@ -15,5 +15,7 @@ public interface QuestionsDao {
 
     String getAnswerById(String id);
 
+    List<String> getAllAnswers();
+
 
 }
