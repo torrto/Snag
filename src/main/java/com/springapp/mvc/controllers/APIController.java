@@ -34,11 +34,7 @@ public class APIController {
 			}
 		}
 		if(minQues == questionListSize){
-				userService.saveUser(wrapper.getUser());
-
-//				for(int q = 0; q < wrapper.getQuestions().size(); q++){
-//					questionsService.saveQuestions(wrapper.getQuestions().get(q));
-//				}
+			userService.saveUser(wrapper.getUser());
 			emailService.sendEmail(wrapper);
 		}
 
